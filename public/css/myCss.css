@@ -1,0 +1,35 @@
+
+/*Para mantener siempre abajo el footer*/
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+main {
+    flex: 1 0 auto;
+  }
+/*----------------fin de mantener abajo el footer*/
+
+    main, footer {
+      padding-left: 250px;
+    }
+
+    @media only screen and (max-width : 992px) {
+      header, main, footer {
+        padding-left: 0;
+      }
+    }
+/*Modal's*/
+#modal-inicio-sesion {
+	width: 30rem !important;
+	height: 60% !important ;
+}
+#curso-create{
+  width: 95% !important;
+  height: 90% !important ;
+}
+/*END*/
+.parallax-container {
+	height: 25rem;
+}
