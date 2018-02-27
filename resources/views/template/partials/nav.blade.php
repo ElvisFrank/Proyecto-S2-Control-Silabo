@@ -1,7 +1,8 @@
 <!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content {{ $color }}">
-  <li><a href="">Ver Perfil</a></li>
-  <li><a href="">Editar Perfil</a></li>
+  @auth
+  <li><a href="{{ route('perfil.show',Auth::user()) }}">Ver Perfil</a></li>
+  <li><a href="{{ route('perfil.edit',Auth::user()->id) }}">Editar Perfil</a></li>
   <li class="divider {{ $colorDiv }}"></li>
   <li><a href="{{ url('logout') }}"
     onclick="event.preventDefault();
@@ -11,6 +12,7 @@
       {{ csrf_field() }}
     </form>
   </li>
+  @endauth
 </ul>
 
 
