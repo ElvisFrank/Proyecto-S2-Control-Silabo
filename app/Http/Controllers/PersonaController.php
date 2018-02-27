@@ -1,11 +1,12 @@
 <?php
 
-namespace CSilabo\Http\Controllers\Director;
+namespace CSilabo\Http\Controllers;
 
 use Illuminate\Http\Request;
-use CSilabo\Http\Controllers\Controller;
-use DB;
-class SilaboController extends Controller
+
+use CSilabo\User;
+use Illuminate\Support\Facades\Auth;
+class PersonaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +15,7 @@ class SilaboController extends Controller
      */
     public function index()
     {
-        $silabos1=DB::table('t_silabos')->get();
-        return view('director.silabo.index',compact('silabos1'));
-    }
-
-    public function temaIndex(Request $request){
-      return view('director.silabo.temaIndex',compact('id'));
-
+        //
     }
 
     /**
@@ -52,7 +47,13 @@ class SilaboController extends Controller
      */
     public function show($id)
     {
-        //
+        $persona=Auth::user();
+        if($persona->id != $id){
+            flash('Este no es su perfil!')->error();
+            return redirect()->route('home');
+        }else{
+            return view('persona.show',compact('persona'));
+        }
     }
 
     /**
@@ -63,7 +64,13 @@ class SilaboController extends Controller
      */
     public function edit($id)
     {
-        //
+        $persona=Auth::user();
+        if($persona->id != $id){
+            flash('Este no es su perfil!')->error();
+            return redirect()->route('home');
+        }else{
+            return view('persona.edit',compact('persona'));
+        }
     }
 
     /**
@@ -75,7 +82,21 @@ class SilaboController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //dd($request);
+
+        $persona=Auth::user();
+        if($persona->id != $id){
+            flash('Este no es su perfil!')->error();
+            return redirect()->route('home');
+        }else{
+            $user=User::find($id);
+            $user->fill($request->all());
+            $user->password=bcrypt($request->password);
+            $user->save();
+            flash('Editado correctamente')->success();
+            return redirect()->route('home');
+        }
+        
     }
 
     /**

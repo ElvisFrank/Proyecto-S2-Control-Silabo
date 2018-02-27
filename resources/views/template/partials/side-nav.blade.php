@@ -21,8 +21,8 @@
               <a class="{{ $textSid }}">{{ Auth::user()->nombre }}<i class="material-icons right">arrow_drop_down</i></a>
               <div class="collapsible-body {{ $color }}">
                 <ul class="left-align">
-                  <li><a class="{{ $textSid }}" href="{{ route('home') }}">Ver Perfil</a></li>
-                  <li><a class="{{ $textSid }}" href="{{ route('home') }}">Editar Perfil</a></li>
+                  <li><a class="{{ $textSid }}" href="{{ route('perfil.show',Auth::user()) }}">Ver Perfil</a></li>
+                  <li><a class="{{ $textSid }}" href="{{ route('perfil.edit',Auth::user()->id) }}">Editar Perfil</a></li>
                   <li class="divider  {{ $colorDiv }}"></li>
                   <li><a class="{{ $textSid }}" href="{{ url('logout') }}"
                     onclick="event.preventDefault();

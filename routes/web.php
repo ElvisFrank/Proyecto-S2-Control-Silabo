@@ -77,6 +77,7 @@ Route::group(['prefix' => 'director', 'namespace' => 'Director', 'as' =>'directo
 			'as' => 'destroy']);
 	});
 	//Grupo de rutas para el Director/silabo
+
 	Route::group(['prefix' => 'silabo', 'as' =>'silabo.'], function(){
 		Route::get('/', [
 			'uses' => 'SilaboController@index',
@@ -103,10 +104,37 @@ Route::group(['prefix' => 'director', 'namespace' => 'Director', 'as' =>'directo
 			'uses' => 'SilaboController@temaIndex',
 			'as' => 'temaIndex']);
 	});
-});
 
+	//Route::resource('silabo', 'SilaboController');
+
+
+});
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'perfil', 'as' => 'perfil.', 'middleware' => 'auth'], function(){
+	Route::get('/', [
+		'uses' => 'PersonaController@index',
+		'as' => 'index']);
+	Route::get('create', [
+		'uses' => 'PersonaController@create',
+		'as' => 'create']);
+	Route::post('/',[
+		'uses' => 'PersonaController@store',
+		'as' => 'store']);
+	Route::get('{semestre}',[
+		'uses' => 'PersonaController@show',
+		'as' => 'show']);
+	Route::get('{semestre}/edit',[
+		'uses' => 'PersonaController@edit',
+		'as' => 'edit']);
+	Route::put('{semestre}',[
+		'uses' => 'PersonaController@update',
+		'as' => 'update']);
+	Route::get('{id}/destroy',[
+		'uses' => 'PersonaController@destroy',
+		'as' => 'destroy']);
+});
