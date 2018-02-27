@@ -57,5 +57,8 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \CSilabo\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'director' => \CSilabo\Http\Middleware\DirectorMiddleware::class,
+        'docente' => \CSilabo\Http\Middleware\DocenteMiddleware::class,
+        'delegado' => \CSilabo\Http\Middleware\DelegadoMiddleware::class,
     ];
 }

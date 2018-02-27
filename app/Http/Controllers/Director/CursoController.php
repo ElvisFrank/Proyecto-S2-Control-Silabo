@@ -8,6 +8,7 @@ use CSilabo\Http\Controllers\Controller;
 use CSilabo\Model\Curso;
 use CSilabo\Model\curso_requisito;
 use CSilabo\Model\Sumilla;
+use Validator;
 class CursoController extends Controller
 {
     /**
@@ -40,6 +41,13 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|min:2|max:100',
+            'codigo' => 'required|min:10|max:10',
+            /*'creditos' => 'required|min:2|max:100',
+            'codigo' => 'required|numeric|min:10|max:10',
+            'creditos' => 'required|numeric|min:10|max:10',*/
+        ]);
         //dd($request);
         $curso=new Curso($request->all());
         $curso->save();
@@ -53,10 +61,10 @@ class CursoController extends Controller
         //$curso->curso_requisito()->sync($request->curso_requisito);
         if ($request->curso_requisito!=null) {
             foreach ($request->curso_requisito as $c_requisito) {
-            $curso_requisito= new curso_requisito();
-            $curso_requisito->curso_id=$curso->id;
-            $curso_requisito->curso_requisito_id=$c_requisito;
-            $curso_requisito->save();
+                $curso_requisito= new curso_requisito();
+                $curso_requisito->curso_id=$curso->id;
+                $curso_requisito->curso_requisito_id=$c_requisito;
+                $curso_requisito->save();
             }
         }
         
@@ -107,6 +115,9 @@ class CursoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $curso=Curso::find($id);
+        $curso->delete();
+        flash('Curso '.$curso->nombre.' Eliminado')->error();
+        return redirect()->route('director.curso.index');
     }
 }

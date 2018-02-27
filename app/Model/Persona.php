@@ -14,4 +14,5 @@ class Persona extends Model
     	return $this->belongsToMany('CSilabo\Model\Role', 'persona_role')
     	->withPivot('persona_id', 'role_id');
     }
+
 }

@@ -1,4 +1,4 @@
-@extends('template.main')
+@extends('template.root')
 
 @section('title-body','Sistema de Control de Silabo')
 @section('class-li-active', 'active')

@@ -3,7 +3,14 @@
   <li><a href="">Ver Perfil</a></li>
   <li><a href="">Editar Perfil</a></li>
   <li class="divider {{ $colorDiv }}"></li>
-  <li><a href="">Cerrar Sesión</a></li>
+  <li><a href="{{ url('logout') }}"
+    onclick="event.preventDefault();
+    document.getElementById('logout-form').submit();
+    ">Cerrar Sesión</a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+      {{ csrf_field() }}
+    </form>
+  </li>
 </ul>
 
 
@@ -19,8 +26,12 @@
       <a href="#" data-activates="side-nav-pagina" class="button-collapse"><i class="material-icons">menu</i></a>
       
       <ul class="right hide-on-med-and-down">
-        <li><a class="modal-trigger {{ $textPag }}" href="#modal-inicio-sesion">Iniciar sesion</a></li>
-        <li><a class="dropdown-button {{ $textPag }}" href="#!" data-activates="dropdown1"><div class="chip"><img src="{{ asset('img/perfil.jpg') }}" alt="Photo Profile">Nombre de usuario</div><i class="material-icons right">arrow_drop_down</i></a></li>
+        @guest
+        <li><a class="modal-trigger {{ $textPag }}" href="{{ route('login') }}">Iniciar sesion</a></li>
+        @endguest
+        @auth
+        <li><a class="dropdown-button {{ $textPag }}" href="#!" data-activates="dropdown1"><div class="chip"><img src="{{ asset('img/perfil.jpg') }}" alt="Photo Profile">{{ Auth::user()->nombre.' '.Auth::user()->paterno.' '.Auth::user()->materno }}</div><i class="material-icons right">arrow_drop_down</i></a></li>
+        @endauth
       </ul>
 
     </div>

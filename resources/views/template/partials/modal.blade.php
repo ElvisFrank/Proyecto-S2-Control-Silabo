@@ -60,34 +60,40 @@
   <div id="docente-create" class="modal">
     <div class="modal-content">      
       <div class="row">
-          <form class="col s12 l10 offset-l1" method="POST" action="{{ route('director.docente.store') }}">
+          <form method="POST" action="{{ route('director.docente.store') }}">
             {{ csrf_field() }}
           <div class="row">
-            <h5 class="left-align">DATOS BASICOS PARA ACTIVAR CUENTA</h5>
-          </div>
 
-            <div class="row">
-                <div class="col s6 l4">
-                    <p class="">Correo Electrónico</p>
-                </div>
-                <div class="col s6 l8">
-                    <input type="email" name="email" id="email" class="validate" placeholder="Correo Electrónico">
-                </div>
+            <h5 class="center-align">DATOS BASICOS PARA ACTIVAR CUENTA</h5>
+
+            <div class="input-field col s12 m8 offset-l1">
+              <input type="text" name="nombre" class="validate" minlength="2" maxlength="50" autofocus required>
+              <label class="active">Nombre</label>
             </div>
 
-          <div class="row">
-            <div class="col s6 l4">
-              <p class="">Contraseña</p>
+            <div class="input-field col s12 m6 l5 offset-l1">
+              <input type="text" name="paterno" class="validate" minlength="2" maxlength="50" required>
+              <label>Apellido Paterno</label>
             </div>
-            <div class="col s6 l8">
-              <input type="password" name="password" id="password" class="validate" placeholder="Contraseña">
-            </div>
-          </div>
 
-            <div class="center-align">
+            <div class="input-field col s12 m6 l5">
+              <input type="text" name="materno" class="validate" minlength="2" maxlength="50">
+              <label>Apellido Materno</label>
+            </div>
+
+            <div class="input-field col s12 m7 l6 offset-l1">
+              <input type="email" name="email" class="validate" minlength="5" maxlength="250" required value="">
+              <label>Correo Electrónico</label>
+            </div>
+
+            <div class="input-field col s12 m5 l4">
+              <input type="password" name="password" class="validate" minlength="2" maxlength="250" required value="">
+              <label>Contraseña</label>
+            </div>
+            <div class="center-align col s12">
                 <button type="submit" class="waves-effect waves-light btn blue center-align"><i class="material-icons left">save</i>Registrar</button>
             </div>
-            <br>
+          </div>
         </form>
       </div>
     </div>

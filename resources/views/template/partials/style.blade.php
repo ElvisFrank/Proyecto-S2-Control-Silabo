@@ -1,6 +1,6 @@
 	{!! Html::style('css/materialize.css') !!}
 	{!! Html::style('css/materialize-Icon.css') !!}
-	{!! Html::style('css/materialize-stepper.min.css') !!}
+	{!! Html::style('css/materialize-stepper.css') !!}
 	{!! Html::style('css/myCss.css') !!}
 	{{-- 
 	{!! Html::style('https://fonts.googleapis.com/icon?family=Material+Icons') !!}

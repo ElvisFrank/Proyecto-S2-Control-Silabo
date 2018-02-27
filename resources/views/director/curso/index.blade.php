@@ -15,7 +15,7 @@
         </div>
       </form>
       <div class="col s2">
-          <a class="btn-floating waves-effect waves-light green darken-4"><i class="material-icons">update</i></a>
+          <a class="btn-floating waves-effect waves-light green darken-4" href="{{ route('director.curso.index') }}"><i class="material-icons">update</i></a>
       </div>
     </div>
     <div class="col s12 m3 right-align">
@@ -40,9 +40,9 @@
             <td>{{ $curso->nombre }}</td>
             <td>{{ $curso->codigo }}</td>
             <td>
-                <a class="btn-floating waves-effect waves-light green darken-4"><i class="material-icons">edit</i></a>
-                <a class="btn-floating waves-effect waves-light red darken-4"><i class="material-icons">delete</i></a>
-                <a class="btn-floating waves-effect waves-light blue darken-4"><i class="material-icons">remove_red_eye</i></a>
+                <a class="btn-floating waves-effect waves-light green darken-4" href="{{ route('director.curso.edit',$curso->id) }}"><i class="material-icons">edit</i></a>
+                <a class="btn-floating waves-effect waves-light red darken-4" href="{{ route('director.curso.destroy',$curso->id) }}" onclick="return confirm('Seguro que desea Eliminar?')"><i class="material-icons">delete</i></a>
+                <a class="btn-floating waves-effect waves-light blue darken-4" href="{{ route('director.curso.show',$curso->id) }}"><i class="material-icons">remove_red_eye</i></a>
             </td>
           </tr>
           @endforeach

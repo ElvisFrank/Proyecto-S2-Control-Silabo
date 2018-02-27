@@ -7,6 +7,8 @@ use CSilabo\Http\Controllers\Controller;
 
 use CSilabo\Model\Persona;
 use CSilabo\Model\Role;
+use DB;
+use Validator;
 class DocenteController extends Controller
 {
     /**
@@ -16,17 +18,13 @@ class DocenteController extends Controller
      */
     public function index()
     {
-        return view('director.docente.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $docentes = DB::table('personas')
+            ->join('persona_role', 'persona_role.persona_id', '=', 'personas.id')
+            ->select('personas.*')
+            ->where('persona_role.role_id', '=', 1)
+            ->orderBy('personas.id', 'desc')
+            ->get();
+        return view('director.docente.index',compact('docentes'));
     }
 
     /**
@@ -37,6 +35,18 @@ class DocenteController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|min:2|max:100',
+            'paterno' => 'required|min:2|max:100',
+            'materno' => 'max:100',
+            'email' => 'email|required|unique:personas',
+            'password' => 'required|min:4|max:255',
+        ]);
+        if($validator->fails()){
+            return redirect()->route('director.docente.index')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
         $persona=new Persona($request->all());
         //$user->fill($request->all());
         $persona->password=bcrypt($request->password);
@@ -57,7 +67,8 @@ class DocenteController extends Controller
      */
     public function show($id)
     {
-        //
+        $docente = Persona::find($id);
+        return view('director.docente.show', compact('docente'));
     }
 
     /**
@@ -68,7 +79,8 @@ class DocenteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $docente = Persona::find($id);
+        return view('director.docente.edit', compact('docente'));
     }
 
     /**
@@ -80,7 +92,36 @@ class DocenteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|min:2|max:100',
+            'paterno' => 'required|min:2|max:100',
+            'materno' => 'required|min:2|max:100',
+            'codigo' => 'required|min:10|max:10',
+            'email' => 'email|required',
+            'password' => 'required|min:4|max:255',
+        ]);
+        //dd($request->email);
+        $var = DB::table('personas')
+                ->where('personas.email','=',$request->email)
+                ->where('personas.id','<>',$id)
+                ->count();
+        //dd($var);
+        if($var){
+            $validator->errors()->add('field', 'Email registrado a otra persona');
+            flash('Email existente');
+        }
+
+        if($validator->fails() || $var){
+            return redirect()->route('director.docente.index')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        $docente=Persona::find($id);
+        $docente->fill($request->all());
+        $docente->password=bcrypt($request->password);
+        $docente->save();
+        flash('Modificado Correctamente')->success();
+        return redirect()->route('director.docente.index');
     }
 
     /**
@@ -91,6 +132,9 @@ class DocenteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $docente=Persona::find($id);
+        $docente->delete();
+        flash('Docente '.$docente->nombre.' Eliminado')->error();
+        return redirect()->route('director.docente.index');
     }
 }

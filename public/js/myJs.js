@@ -1,6 +1,6 @@
 
 /*Tiempo de alerta del flash mensage*/
-$('div.alert').not('.alert-important').delay(2500).fadeOut(1150);
+$('div.alert').not('.alert-important').delay(8500).fadeOut(1150);
 /*----------------fin de Tiempo de alerta del flash mensage*/
 
 /*Dar funcionalidad al Nav en mobiles.*/
