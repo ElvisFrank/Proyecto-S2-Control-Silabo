@@ -4,8 +4,8 @@ namespace CSilabo\Http\Controllers\Director;
 
 use Illuminate\Http\Request;
 use CSilabo\Http\Controllers\Controller;
-use DB;
-class SilaboController extends Controller
+
+class TemaCntroller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +14,7 @@ class SilaboController extends Controller
      */
     public function index()
     {
-        $silabos1=DB::table('t_silabos')->get();
-        return view('director.silabo.index',compact('silabos1'));
-    }
-
-    public function temaIndex(Request $request){
-        return view('director.silabo.temaIndex',compact('id'));
-
+        //
     }
 
     /**

@@ -77,7 +77,32 @@ Route::group(['prefix' => 'director', 'namespace' => 'Director', 'as' =>'directo
 			'as' => 'destroy']);
 	});
 	//Grupo de rutas para el Director/silabo
-	Route::resource('silabo', 'SilaboController');
+	Route::group(['prefix' => 'silabo', 'as' =>'silabo.'], function(){
+		Route::get('/', [
+			'uses' => 'SilaboController@index',
+			'as' => 'index']);
+		Route::get('create', [
+			'uses' => 'SilaboController@create',
+			'as' => 'create']);
+		Route::post('/',[
+			'uses' => 'SilaboController@store',
+			'as' => 'store']);
+		Route::get('{silabo}',[
+			'uses' => 'SilaboController@show',
+			'as' => 'show']);
+		Route::get('{silabo}/edit',[
+			'uses' => 'SilaboController@edit',
+			'as' => 'edit']);
+		Route::put('{silabo}',[
+			'uses' => 'SilaboController@update',
+			'as' => 'update']);
+		Route::get('{id}/destroy',[
+			'uses' => 'SilaboController@destroy',
+			'as' => 'destroy']);
+		Route::get('{silabo}',[
+			'uses' => 'SilaboController@temaIndex',
+			'as' => 'temaIndex']);
+	});
 });
 
 
