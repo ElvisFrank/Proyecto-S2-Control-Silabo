@@ -70,7 +70,7 @@
             <td>{{ $semestre->año.' - '.$semestre->numero }}</td>
             <td>
                 <a class="btn-floating waves-effect waves-light green darken-4 modal-trigger" href="#semestre-edit"><i class="material-icons">edit</i></a>
-                <a class="btn-floating waves-effect waves-light red darken-4"><i class="material-icons">delete</i></a>
+                <a class="btn-floating waves-effect waves-light red darken-4" href="{{ route('director.semestre.destroy',$semestre->id) }}"><i class="material-icons" onclick="return confirm('Seguro que desea Eliminar?')">delete</i></a>
                 <a class="btn-floating waves-effect waves-light blue darken-4" href="{{ route('director.semestre.show',$semestre->id) }}"><i class="material-icons">remove_red_eye</i></a>
             </td>
           </tr>

@@ -2,6 +2,38 @@
 
 @section('title-body',"$semestre->año - $semestre->numero")
 @section('content')
+
+  <!-- Modal Agregar curso.. -->
+  <div id="semestre-show-add" class="modal">
+    <div class="modal-content">      
+      <div class="row">
+          <form method="POST" action="{{ route('director.semestre.storeCurso') }}">
+            {{ csrf_field() }}
+            <input type="hidden" name="semestreId" value="{{ $semestre->id }}">
+          <div class="row">
+
+            <h5 class="center-align">Activar cursos para el semestre</h5>
+
+            <div class="row">
+                <div class="input-field col s8 offset-s2">
+                    <select multiple required name="cursosActivados[]" id="curso_requisito">
+                        <option value="" disabled selected>Seleccione los cursos</option>
+                        @foreach($cursosdisponibles as $curso)
+                        <option value="{{ $curso->id }}">{{ $curso->nombre }}</option>
+                        @endforeach
+                    </select>
+                    <label>Cursos  a activar</label>
+                </div>
+            </div>
+
+            <div class="center-align col s12">
+                <button type="submit" class="waves-effect waves-light btn blue center-align"><i class="material-icons left">save</i>Registrar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 <div class="row">
 
 
@@ -34,15 +66,17 @@
         </thead>
 
         <tbody>
+          @foreach($semestre->cursos as $curso)
           <tr>
-            <td>01</td>
-            <td>Curso nombre</td>
+            <td>{{ $curso->codigo }}</td>
+            <td>{{ $curso->nombre }}</td>
             <td><a class="none waves-effect waves-light right-align"><i class="material-icons" style="color: rgba(250, 0, 0, 1);">delete</i></a></td>
             <td>docente</td>
             <td>
                 <a class="btn-floating waves-effect waves-light blue darken-4"><i class="material-icons">person_add</i></a>
             </td>
           </tr>
+          @endforeach
         </tbody>
       </table>
 

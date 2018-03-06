@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use CSilabo\Http\Controllers\Controller;
 
 use CSilabo\Model\Semestre;
+use CSilabo\Model\Curso;
+use DB;
 class SemestreController extends Controller
 {
     /**
@@ -42,6 +44,14 @@ class SemestreController extends Controller
         flash('Registrado correctamente')->success();
         return redirect()->route('director.semestre.index');
     }
+    public function storeCurso(Request $request)
+    {
+        $semestre=Semestre::find($request->semestreId);
+        //dd($semestre);
+        $semestre->cursos()->sync($request->cursosActivados);
+        flash('Registrado correctamente')->success();
+        return redirect()->route('director.semestre.show',$request->semestreId);
+    }
 
     /**
      * Display the specified resource.
@@ -52,7 +62,21 @@ class SemestreController extends Controller
     public function show($id)
     {
         $semestre=Semestre::find($id);
-        return view('director.semestre.show',compact('semestre'));
+        $semestre->cursos();
+        //Esto solo en caso de agregacion manual...
+        $i=0;
+        foreach ($semestre->cursos as $key => $value) {
+            $vector[$i]=$value->id;
+            $i++;
+        }   
+        $cursosdisponibles=DB::table('cursos')
+            ->select('cursos.id','cursos.nombre')
+            ->whereNotIn('id', $vector)
+            ->get();
+        
+       //$cursosdisponibles=Curso::orderBy('nombre','DESC')->lists('nombre','id');
+       //$my_cursos = $semestre->cursos->lists('id')->ToArray();
+        return view('director.semestre.show',compact('semestre','cursosdisponibles'));
     }
 
     /**
@@ -86,6 +110,8 @@ class SemestreController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $semestre = Semestre::find($id);
+        $semestre->delete();
+        return redirect()->route('director.semestre.index');
     }
 }

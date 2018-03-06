@@ -15,4 +15,9 @@ class Curso extends Model
     	->withPivot('curso_id', 'curso_requisito_id');
     }
 
+    public function semestres()
+    {
+    	return $this->belongsToMany('CSilabo\Model\Semestre', 'curso_activado')
+    	->withPivot('curso_id', 'semestre_id');
+    }
 }

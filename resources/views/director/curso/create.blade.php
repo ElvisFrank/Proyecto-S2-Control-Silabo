@@ -21,7 +21,7 @@
                 <p class="">Codigo</p>
             </div>
             <div class="col s7 m3">
-                <input type="text" name="codigo" id="codigo" class="validate" placeholder="Codigo" required data-length="10" minlength="10" maxlength="10">
+                <input type="text" name="codigo" id="codigo" class="validate" placeholder="Codigo" required data-length="10" minlength="2" maxlength="10">
             </div>
             <div class="col s5 m3">
                 <p class="">Creditos</p>
