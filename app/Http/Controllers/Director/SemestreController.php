@@ -65,6 +65,7 @@ class SemestreController extends Controller
         $semestre->cursos();
         //Esto solo en caso de agregacion manual...
         $i=0;
+        $vector[0]=-1;
         foreach ($semestre->cursos as $key => $value) {
             $vector[$i]=$value->id;
             $i++;
