@@ -114,6 +114,83 @@ Route::group(['prefix' => 'director', 'namespace' => 'Director', 'as' =>'directo
 });
 
 
+/*Haciendo un grupo de rutas... para el Docente*/
+Route::group(['prefix' => 'docente', 'namespace' => 'Docente', 'as' =>'docente.', 'middleware' => ['auth','docente']], function(){
+	//Grupo de rutas para el Docente/curso
+	Route::group(['prefix' => 'curso', 'as' =>'curso.'], function(){
+		Route::get('/', [
+			'uses' => 'CursoController@index',
+			'as' => 'index']);
+		Route::get('create', [
+			'uses' => 'CursoController@create',
+			'as' => 'create']);
+		Route::post('/',[
+			'uses' => 'CursoController@store',
+			'as' => 'store']);
+		Route::get('{curso}',[
+			'uses' => 'CursoController@show',
+			'as' => 'show']);
+		Route::get('{curso}/edit',[
+			'uses' => 'CursoController@edit',
+			'as' => 'edit']);
+		Route::put('{curso}',[
+			'uses' => 'CursoController@update',
+			'as' => 'update']);
+		Route::get('{id}/destroy',[
+			'uses' => 'CursoController@destroy',
+			'as' => 'destroy']);
+	});
+	//Grupo de rutas para el Docente/temas
+	Route::group(['prefix' => 'tema', 'as' =>'tema.'], function(){
+		Route::get('/', [
+			'uses' => 'TemaController@index',
+			'as' => 'index']);
+		Route::post('/',[
+			'uses' => 'TemaController@store',
+			'as' => 'store']);
+		Route::get('{tema}',[
+			'uses' => 'TemaController@show',
+			'as' => 'show']);
+		Route::get('{tema}/edit',[
+			'uses' => 'TemaController@edit',
+			'as' => 'edit']);
+		Route::put('{tema}',[
+			'uses' => 'TemaController@update',
+			'as' => 'update']);
+		Route::get('{id}/destroy',[
+			'uses' => 'TemaController@destroy',
+			'as' => 'destroy']);
+	});	
+});
+
+/*Haciendo un grupo de rutas... para el Delegado*/
+Route::group(['prefix' => 'delegado', 'namespace' => 'Delegado', 'as' =>'delegado.', 'middleware' => ['auth','delegado']], function(){
+	//Grupo de rutas para el Delegado/cursos
+	Route::group(['prefix' => 'curso', 'as' =>'curso.'], function(){
+		Route::get('/', [
+			'uses' => 'CursoController@index',
+			'as' => 'index']);
+		Route::get('create', [
+			'uses' => 'CursoController@create',
+			'as' => 'create']);
+		Route::post('/',[
+			'uses' => 'CursoController@store',
+			'as' => 'store']);
+		Route::get('{curso}',[
+			'uses' => 'CursoController@show',
+			'as' => 'show']);
+		Route::get('{curso}/edit',[
+			'uses' => 'CursoController@edit',
+			'as' => 'edit']);
+		Route::put('{curso}',[
+			'uses' => 'CursoController@update',
+			'as' => 'update']);
+		Route::get('{id}/destroy',[
+			'uses' => 'CursoController@destroy',
+			'as' => 'destroy']);
+	});
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

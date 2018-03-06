@@ -14,7 +14,7 @@ class TemaController extends Controller
      */
     public function index()
     {
-        //
+        return view('docente.tema.index');
     }
 
     /**

@@ -56,29 +56,29 @@
         {{-- END SideNav del director --}}
     @endif
 
-		{{-- SideNav del director --}}
+		{{-- SideNav del Docente --}}
     @if(DB::table('persona_role')
       ->join('roles','roles.id','persona_role.role_id')
       ->where('persona_role.persona_id','=',Auth::user()->id)
       ->where('roles.nombre','=','Docente')
       ->first()
       )
-        <li><a href="" class="{{ $textSid }}">Mis cursos</a></li>
-        <li><a href="" class="{{ $textSid }}">Mis temas</a></li>      
+        <li><a href="{{ route('docente.curso.index') }}" class="{{ $textSid }}">Mis cursos</a></li>
+        <li><a href="{{ route('docente.tema.index') }}" class="{{ $textSid }}">Mis temas</a></li>      
         <li class="divider {{ $colorDiv }}"></li>
-        {{-- END SideNav del director --}}
+        {{-- END SideNav del Docente --}}
     @endif
 
-		{{-- SideNav del director --}}
+		{{-- SideNav del Delegado --}}
     @if(DB::table('persona_role')
       ->join('roles','roles.id','persona_role.role_id')
       ->where('persona_role.persona_id','=',Auth::user()->id)
       ->where('roles.nombre','=','Delegado')
       ->first()
       )
-        <li><a href="" class="{{ $textSid }}">Mis cursos</a></li>    
+        <li><a href="{{ route('delegado.curso.index')}}" class="{{ $textSid }}">Mis cursos</a></li>    
         <li class="divider {{ $colorDiv }}"></li>
-        {{-- END SideNav del director --}}
+        {{-- END SideNav del Delegado --}}
     @endif
 
         @endauth

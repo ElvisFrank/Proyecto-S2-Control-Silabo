@@ -34,7 +34,12 @@
           <tr>
             <td>{{ $silabo->docente }}</td>
             <td>{{ $silabo->curso }}</td>
-            <td>Barra de avance</td>
+            <td>
+              <form name="formulario" method="post" action="http://pagina.com/send.php">
+              <!-- Barra de progreso -->
+              <progress max="100" value="25">
+              </form>
+            </td>
             <td>
               <a class="btn-floating waves-effect waves-light green darken-4" href=""><i class="material-icons">library_books</i></a>
                 <a class="btn-floating waves-effect waves-light red darken-4" href="{{ route('director.silabo.temaIndex',$silabo->id) }}" ><i class="material-icons">playlist_add_check</i></a>

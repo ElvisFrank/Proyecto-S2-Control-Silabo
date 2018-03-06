@@ -1,6 +1,6 @@
 <?php
 
-namespace CSilabo\Http\Controllers\Delegado;
+namespace CSilabo\Http\Controllers\Docente;
 
 use Illuminate\Http\Request;
 use CSilabo\Http\Controllers\Controller;
@@ -14,7 +14,7 @@ class CursoController extends Controller
      */
     public function index()
     {
-        return view('delegado.curso.index');
+       return view('docente.curso.index');
     }
 
     /**
