@@ -7,6 +7,7 @@ use CSilabo\Http\Controllers\Controller;
 
 use CSilabo\Model\Semestre;
 use CSilabo\Model\Curso;
+use CSilabo\Model\curso_docente;
 use DB;
 class SemestreController extends Controller
 {
@@ -52,6 +53,30 @@ class SemestreController extends Controller
         flash('Registrado correctamente')->success();
         return redirect()->route('director.semestre.show',$request->semestreId);
     }
+    public function storeCursoDocente(Request $request)
+    {
+        $curso_activado=DB::table('curso_activado')
+            ->select('curso_activado.id')
+            ->where('curso_activado.curso_id','=',$request->curso_id)
+            ->where('curso_activado.semestre_id','=',$request->semestreId)
+            ->first();
+        $request->curso_id=$curso_activado->id;
+        //dd($request->all());
+        if((boolean)DB::table('curso_docente')
+            ->where('curso_docente.curso_id','=',$request->curso_id)
+            ->where('curso_docente.persona_id','=',$request->persona_id)
+            ->first()){
+                flash('Informacion existente')->success();
+                return redirect()->route('director.semestre.show',$request->semestreId);
+        }
+        $curso_docente = new curso_docente();
+        $curso_docente->curso_id=$request->curso_id;
+        $curso_docente->persona_id=$request->persona_id;
+        $curso_docente->grupo=$request->grupo;
+        $curso_docente->save();
+        flash('Registrado correctamente')->success();
+        return redirect()->route('director.semestre.show',$request->semestreId);
+    }
 
     /**
      * Display the specified resource.
@@ -62,7 +87,14 @@ class SemestreController extends Controller
     public function show($id)
     {
         $semestre=Semestre::find($id);
-        $semestre->cursos();
+        //$semestre->cursos();
+        //dd($semestre->cursos);
+        $docentes=DB::table('personas')
+            ->join('persona_role','personas.id','=','persona_role.persona_id')
+            ->join('roles','persona_role.role_id','=','roles.id')
+            ->select('personas.*')
+            ->where('roles.nombre','=','Docente')
+            ->get();
         //Esto solo en caso de agregacion manual...
         $i=0;
         $vector[0]=-1;
@@ -72,12 +104,12 @@ class SemestreController extends Controller
         }   
         $cursosdisponibles=DB::table('cursos')
             ->select('cursos.id','cursos.nombre')
-            ->whereNotIn('id', $vector)
+            //->whereNotIn('id', $vector)
             ->get();
         
        //$cursosdisponibles=Curso::orderBy('nombre','DESC')->lists('nombre','id');
        //$my_cursos = $semestre->cursos->lists('id')->ToArray();
-        return view('director.semestre.show',compact('semestre','cursosdisponibles'));
+        return view('director.semestre.show',compact('semestre','cursosdisponibles','vector','docentes'));
     }
 
     /**

@@ -29,7 +29,7 @@ class CreateCursoActivadoTable extends Migration
             $table->integer('persona_id')->unsigned();
             $table->integer('silabo_id')->unsigned()->nullable();
             $table->string('grupo',10)->default('I');
-            $table->foreign('curso_id')->references('id')->on('cursos')->onDelete('cascade');
+            $table->foreign('curso_id')->references('id')->on('curso_activado')->onDelete('cascade');
             $table->foreign('persona_id')->references('id')->on('personas')->onDelete('cascade');
             $table->foreign('silabo_id')->references('id')->on('silabos')->onDelete('cascade');
             $table->nullableTimestamps();

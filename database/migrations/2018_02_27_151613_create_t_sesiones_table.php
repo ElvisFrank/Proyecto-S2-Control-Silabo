@@ -15,11 +15,11 @@ class CreateTSesionesTable extends Migration
     {
         Schema::create('t_sesiones', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tema');
+            $table->string('tema')->nullable();
             $table->integer('id_unidad')->unsigned();
-            $table->char('val_docente',4);
-            $table->char('val_delegado',4);
-            $table->date('fecha');
+            $table->char('val_docente',4)->nullable();
+            $table->char('val_delegado',4)->nullable();
+            $table->date('fecha')->nullable();
             $table->foreign('id_unidad')->references('id')->on('t_unidades');
             $table->nullableTimestamps();
         });

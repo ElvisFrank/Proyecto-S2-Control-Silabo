@@ -15,4 +15,9 @@ class Persona extends Model
     	->withPivot('persona_id', 'role_id');
     }
 
+    public function cursosActivados()
+    {
+    	return $this->belongsToMany('CSilabo\Model\curso_activado', 'curso_docente')
+    	->withPivot('curso_id', 'persona_id');
+    }
 }

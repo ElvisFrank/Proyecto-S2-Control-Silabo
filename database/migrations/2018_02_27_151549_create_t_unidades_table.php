@@ -15,7 +15,7 @@ class CreateTUnidadesTable extends Migration
     {
         Schema::create('t_unidades', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre_unidad');
+            $table->string('nombre_unidad')->nullable();
             $table->integer('id_silabo')->unsigned();
             $table->foreign('id_silabo')->references('id')->on('t_silabos')->ondelete('cascade');
             $table->nullableTimestamps();

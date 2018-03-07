@@ -66,6 +66,9 @@ Route::group(['prefix' => 'director', 'namespace' => 'Director', 'as' =>'directo
 		Route::post('storeCurso',[
 			'uses' => 'SemestreController@storeCurso',
 			'as' => 'storeCurso']);
+		Route::post('storeCursoDocente',[
+			'uses' => 'SemestreController@storeCursoDocente',
+			'as' => 'storeCursoDocente']);
 		Route::get('{semestre}',[
 			'uses' => 'SemestreController@show',
 			'as' => 'show']);

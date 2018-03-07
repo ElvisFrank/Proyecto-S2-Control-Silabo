@@ -15,8 +15,8 @@ class CreateTSilabosTable extends Migration
     {
         Schema::create('t_silabos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('docente');
-            $table->string('curso');
+            $table->string('docente')->nullable();
+            $table->string('curso')->nullable();
             $table->nullableTimestamps();
         });
     }
