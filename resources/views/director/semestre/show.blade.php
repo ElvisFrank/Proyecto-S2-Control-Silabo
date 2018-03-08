@@ -121,10 +121,11 @@
               $docentes=DB::table('curso_activado')
                 ->join('curso_docente','curso_docente.curso_id','=','curso_activado.id')
                 ->join('personas','personas.id','=','curso_docente.persona_id')
-                ->selectRaw("CONCAT(personas.nombre,' ',personas.paterno,' ',personas.materno,'.') as nombre")
+                ->selectRaw("CONCAT(personas.nombre,' ',personas.paterno,'.') as nombre")
                 ->where('curso_activado.curso_id','=',$curso->id)
                 ->where('curso_activado.semestre_id','=',$semestre->id)
                 ->get();
+                //dd($docentes);
               ?>
               @foreach($docentes as $cActivado)
                 <p>{{ $cActivado->nombre }}</p>

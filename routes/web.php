@@ -124,7 +124,7 @@ Route::group(['prefix' => 'docente', 'namespace' => 'Docente', 'as' =>'docente.'
 		Route::get('/', [
 			'uses' => 'CursoController@index',
 			'as' => 'index']);
-		Route::get('create', [
+		Route::post('create', [
 			'uses' => 'CursoController@create',
 			'as' => 'create']);
 		Route::post('/',[
