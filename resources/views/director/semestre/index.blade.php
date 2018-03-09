@@ -57,8 +57,7 @@
       <table class="highlight responsive-table">
         <thead>
           <tr>
-              <th>ID</th>
-              <th>Nombre del semestre</th>
+              <th>Semestre</th>
               <th>Acciones</th>
           </tr>
         </thead>
@@ -66,7 +65,6 @@
         <tbody>
           @foreach($semestres as $semestre)
           <tr>
-            <td>{{ $semestre->id }}</td>
             <td>{{ $semestre->año.' - '.$semestre->numero }}</td>
             <td>
                 <a class="btn-floating waves-effect waves-light green darken-4 modal-trigger" href="#semestre-edit"><i class="material-icons">edit</i></a>

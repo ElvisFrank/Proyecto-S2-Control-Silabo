@@ -22,7 +22,7 @@ class DocenteController extends Controller
             ->join('persona_role', 'persona_role.persona_id', '=', 'personas.id')
             ->select('personas.*')
             ->where('persona_role.role_id', '=', 1)
-            ->orderBy('personas.id', 'desc')
+            ->orderBy('paterno', 'ASC')
             ->get();
         return view('director.docente.index',compact('docentes'));
     }
@@ -40,6 +40,7 @@ class DocenteController extends Controller
             'paterno' => 'required|min:2|max:100',
             'materno' => 'max:100',
             'email' => 'email|required|unique:personas',
+            'codigo' => 'nullable|unique:personas',
             'password' => 'required|min:4|max:255',
         ]);
         if($validator->fails()){
@@ -96,7 +97,7 @@ class DocenteController extends Controller
             'nombre' => 'required|min:2|max:100',
             'paterno' => 'required|min:2|max:100',
             'materno' => 'required|min:2|max:100',
-            'codigo' => 'required|min:10|max:10',
+            'codigo' => 'nullable|unique:personas',
             'email' => 'email|required',
             'password' => 'required|min:4|max:255',
         ]);

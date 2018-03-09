@@ -42,9 +42,16 @@ class CursoController extends Controller
      */
     public function create(Request $request)
     {
-        $semestre = Semestre::find($request->semestre_id);
-        dd($semestre);
-        return view('docente.curso.create');
+        //$semestre = Semestre::find($request->semestre_id);
+        $semestre = DB::table('semestres')
+            ->selectRaw("CONCAT(año,' - ',numero) as nombre,id")
+            ->where('id','=',$request->semestre_id)
+            ->first();
+        $curso=DB::table('cursos')
+            ->select('cursos.*')
+            ->where('id','=',$request->curso_id)
+            ->first();
+        return view('docente.curso.create', compact('semestre','curso'));
     }
 
     /**

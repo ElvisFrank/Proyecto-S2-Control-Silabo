@@ -5,9 +5,9 @@
 <ul class="side-nav fixed {{ $color }}" id="side-nav-pagina">
         <li><div class="user-view">
           <div class="background">
-            <img class="responsive-img" src="{{ asset('img/viento.jpg') }}">
+            <img class="responsive-img" src="{{ asset('img/fiis-logo.png') }}" style="height: 100%;">
           </div>
-          <a href="{{ route('home') }}"><span class="white-text name"><br><br><br>{{ $tema }}</span></a>
+          <a href="{{ route('home') }}"><span class="black-text name"><br><br><br>{{ $tema }}</span></a>
         </div></li>
         
         {{-- Mostrar solo cuando esta modo mobil.. --}}

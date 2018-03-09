@@ -26,9 +26,8 @@
       <table class="highlight responsive-table">
         <thead>
           <tr>
-              <th>ID</th>
-              <th>Nombre del curso</th>
               <th>Codigo</th>
+              <th>Nombre del curso</th>
               <th>Acciones</th>
           </tr>
         </thead>
@@ -36,9 +35,8 @@
         <tbody>
           @foreach($cursos as $curso)
           <tr>
-            <td>{{ $curso->id }}</td>
-            <td>{{ $curso->nombre }}</td>
             <td>{{ $curso->codigo }}</td>
+            <td>{{ $curso->nombre }}</td>
             <td>
                 <a class="btn-floating waves-effect waves-light green darken-4" href="{{ route('director.curso.edit',$curso->id) }}"><i class="material-icons">edit</i></a>
                 <a class="btn-floating waves-effect waves-light red darken-4" href="{{ route('director.curso.destroy',$curso->id) }}" onclick="return confirm('Seguro que desea Eliminar?')"><i class="material-icons">delete</i></a>

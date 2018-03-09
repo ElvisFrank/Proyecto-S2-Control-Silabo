@@ -103,9 +103,8 @@
       <table class="highlight responsive-table">
         <thead>
           <tr>
-              <th>ID</th>
-              <th>Nombre del curso</th>
-              <th>Remover</th>
+              <th>Codugo</th>
+              <th>Nombre</th>
               <th colspan="2">Docente(s)</th>
           </tr>
         </thead>
@@ -115,7 +114,6 @@
           <tr>
             <td>{{ $curso->codigo }}</td>
             <td>{{ $curso->nombre }}</td>
-            <td><a class="none waves-effect waves-light right-align"><i class="material-icons" style="color: rgba(250, 0, 0, 1);">delete</i></a></td>
             <td>
               <?php
               $docentes=DB::table('curso_activado')
@@ -132,7 +130,7 @@
               @endforeach
             </td>
             <td>              
-                <a class="btn-floating waves-effect waves-light modal-trigger blue darken-4" href="#semestre-show-add-docente"onclick="cambiaDefecto({{ $curso->id }})"><i class="material-icons">person_add</i></a>
+                <a class="btn-floating waves-effect waves-light modal-trigger blue darken-4" href="#semestre-show-add-docente" onclick="cambiaDefecto({{ $curso->id }})"><i class="material-icons">person_add</i></a>
             </td>
           </tr>
           @endforeach

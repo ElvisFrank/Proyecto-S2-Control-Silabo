@@ -39,7 +39,8 @@ ul.stepper {
       -ms-flex-pack: justify;
       -webkit-box-pack: justify;
       justify-content: space-between;
-      min-height: 458px;
+      /*min-height: 458px;*/
+      min-height: 70rem;
    }
 
    .card-content ul.stepper.horizontal {
@@ -192,7 +193,7 @@ ul.stepper .step-title {
       line-height: 84px;
       height: 84px;
       margin: 0;
-      padding: 0 25px 0 65px;
+      padding: 0 25px 0 45px;
       display: inline-block;
       max-width: 220px;
       white-space: nowrap;
@@ -344,7 +345,7 @@ ul.stepper .step-actions .btn:not(:last-child), ul.stepper .step-actions .btn-fl
    }
 
    ul.stepper.horizontal .step-actions {
-      position: absolute;
+      position: relative/*absolute*/;
       bottom: 0;
       left: 0;
       width: 100%;

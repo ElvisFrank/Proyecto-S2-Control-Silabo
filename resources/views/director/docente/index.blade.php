@@ -36,9 +36,9 @@
       <table class="highlight responsive-table">
         <thead>
           <tr>
-              <th>N</th>
-              <th>Nombre del docente</th>
+              <th>Codigo</th>
               <th>Apellidos</th>
+              <th>Nombre</th>
               <th>Correo</th>
               <th>Acciones</th>
           </tr>
@@ -47,9 +47,9 @@
         <tbody>
           @foreach($docentes as $docente)
           <tr>
-            <td>{{ $docente->id }}</td>
-            <td>{{ $docente->nombre }}</td>
+            <td>{{ $docente->codigo }}</td>
             <td>{{ $docente->paterno." ".$docente->materno }}</td>
+            <td>{{ $docente->nombre }}</td>
             <td>{{ $docente->email }}</td>
             <td>
                 <a class="btn-floating waves-effect waves-light green darken-4" href="{{ route('director.docente.edit',$docente->id) }}"><i class="material-icons">edit</i></a>

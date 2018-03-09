@@ -9,6 +9,7 @@ use CSilabo\Model\Curso;
 use CSilabo\Model\curso_requisito;
 use CSilabo\Model\Sumilla;
 use Validator;
+use DB;
 class CursoController extends Controller
 {
     /**
@@ -18,7 +19,12 @@ class CursoController extends Controller
      */
     public function index()
     {
-        $cursos = Curso::orderBy('id','DESC')->get();
+        //$cursos = Curso::all()->select('id','codigo','nombre')->orderBy('codigo','ASC')->get();
+        $cursos=DB::table('cursos')
+            ->select('id','codigo','nombre')
+            ->orderBy('codigo','ASC')
+            ->get();
+        //dd($cursos);
         return view('director.curso.index', compact('cursos'));
     }
 
@@ -42,13 +48,19 @@ class CursoController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nombre' => 'required|min:2|max:100',
-            'codigo' => 'required|min:10|max:10',
+            'nombre' => 'required|min:2|max:100|unique:cursos',
+            'codigo' => 'required|min:10|max:10|unique:cursos',
             /*'creditos' => 'required|min:2|max:100',
             'codigo' => 'required|numeric|min:10|max:10',
             'creditos' => 'required|numeric|min:10|max:10',*/
         ]);
-        //dd($request);
+
+        if($validator->fails()){
+            flash('Informacion ya exitente')->error();
+            return redirect()->route('director.curso.index')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
         $curso=new Curso($request->all());
         $curso->save();
         $sumilla=new sumilla();

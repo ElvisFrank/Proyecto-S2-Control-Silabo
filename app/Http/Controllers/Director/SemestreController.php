@@ -18,7 +18,7 @@ class SemestreController extends Controller
      */
     public function index()
     {
-        $semestres=Semestre::orderBy('id','DESC')->get();
+        $semestres=Semestre::orderBy('año','DESC')->orderBy('numero','DESC')->get();
         return view('director.semestre.index',compact('semestres'));
     }
 
